@@ -204,3 +204,10 @@ Git Pull
 Used to fetch new updates from the remote repository and merge them with the local copy. Git Pull performs the same task as Git Fetch, but adds an extra step: it automatically executes the `git merge` command to merge the new updates with the local copy.
 
 You can use `git fetch` when you just want to retrieve new updates without merging them into your local copy, while you can use `git pull` when you want to retrieve new updates and merge them into your local copy. 
+
+Section 17:
+Fork
+This means creating a copy of the current Git repository and storing it in another Git account. This command is typically used when you want to add improvements or modifications to an existing Git project on the internet; a copy of the original repository is created and modified without affecting the original repository. Anyone can create a copy of the repository, make the desired changes, and submit them to the project’s original repository by sending a pull request.
+
+Clone
+This means creating a copy of the current Git repository and storing it on your computer. This command is typically used when you want to obtain a copy of a Git repository hosted online onto your computer so you can work on it locally. You can use the `clone` command when you want to get an updated version of the repository after changes have been made by the development team.
