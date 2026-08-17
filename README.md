@@ -95,4 +95,20 @@ To switch to a specific branch or commit, use the `git switch` command followed 
 git switch -c new-feature
 
 Section 10:
+git branch -d branchname
+The “git branch -d branchname” command is used to delete a Git branch from a Git repository.
 
+Therefore, when you use the “git branch -d branchname” command, Git will delete the specified branch (branchname) from the current Git repository. You need to be careful when using this command because if you accidentally delete the branch you’re working on, you may lose the work you’ve done on that branch.
+
+git merge
+The “git merge” command is used to merge a specific Git branch with another branch in the Git repository. Merging allows you to incorporate changes from one branch into another.
+
+When you merge two branches in Git using the “git merge” command, a new “commit” is created that contains all the changes from both the first and second branches.
+
+The “git merge” command is used as follows:
+
+git merge branchname
+
+where “branchname” is the name of the branch you want to merge into the current branch. It is important to make sure you have switched to the main branch before using this command, using the command
+
+ git checkout main-branch
