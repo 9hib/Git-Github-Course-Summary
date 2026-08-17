@@ -119,3 +119,9 @@ The term “fast-forward merge” refers to a type of merge in Git where a branc
 
 The 3-way merge
 This is another type of branch merge in Git, used when there are changes in the main branch. In this case, Git creates a new merge commit and attempts to merge the changes from both branches.
+
+Section 12:
+Squash Merge
+A squash merge is one of the ways to merge branches in Git. This method is used when you want to merge the changes made in a specific branch into another branch.
+
+A Squash Merge is a good way to reduce the number of unnecessary commits in a Git project’s history and to keep the project’s history clean and organized. It’s important to note that if you use a squash merge in Git, you should make sure to keep the project history neat and organized by using proper commit messages and accurate descriptions of the merged changes.
