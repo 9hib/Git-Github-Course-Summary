@@ -125,3 +125,10 @@ Squash Merge
 A squash merge is one of the ways to merge branches in Git. This method is used when you want to merge the changes made in a specific branch into another branch.
 
 A Squash Merge is a good way to reduce the number of unnecessary commits in a Git project’s history and to keep the project’s history clean and organized. It’s important to note that if you use a squash merge in Git, you should make sure to keep the project history neat and organized by using proper commit messages and accurate descriptions of the merged changes.
+
+Section 13:
+Merge conflicts
+Merge conflicts are part of the merge process in Git.
+Merge conflicts occur when the same file or section is modified differently in two different branches by more than one user at the same time, resulting in conflicts between the different changes that must be resolved.
+When conflicts occur, Git notifies the user of the conflicts and asks them to take the necessary action to resolve them.
+Conflicts can be resolved in various ways, such as manually merging the different changes, choosing one change over another, or using automated tools to merge the changes. The appropriate option depends on the nature of the conflict, the file size, and the user’s preferences. Once the conflicts are resolved, the new version is saved.
