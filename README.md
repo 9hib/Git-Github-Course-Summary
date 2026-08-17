@@ -94,3 +94,5 @@ To switch to a specific branch or commit, use the `git switch` command followed 
 
 git switch -c new-feature
 
+Section 10:
+
