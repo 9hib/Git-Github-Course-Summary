@@ -1,213 +1,145 @@
-Section 1:
-What is version control?
-A tool that manages changes to code and files within a project.
-A tool that allows you to track all modifications, along with the timestamps for each one.
-A tool that lets you store a copy of your files on your personal device or on the version control system itself, such as Git.
-What is Git?
+# 🌿 Git & GitHub — Course Notes
 
-Git is a version control system widely used in software development. Git allows developers to track and manage changes in a software project efficiently, as well as collaborate with development teams.
+> Personal summary from a Git & GitHub course, organized around the actual local → branch → merge → remote workflow.
 
-Git allows users to easily create copies of a project (branches) and merge changes between these copies in a secure and organized manner. Git is based on a distributed model, where developers can work on the project independently and merge their changes later. This facilitates work on large projects and enables effective collaboration among team members. It is one of the most popular version control systems.
+---
 
-There are many different programs used for version control, such as:
+## 📑 Table of Contents
 
-- CVS
+- [1. Foundations](#1-foundations)
+- [2. The Local Workflow](#2-the-local-workflow)
+- [3. Branching](#3-branching)
+- [4. Merging](#4-merging)
+- [5. GitHub & Remotes](#5-github--remotes)
 
-- SVN
+---
 
-- Perforce
+## 1. Foundations
 
-- Bazaar
+### What is version control?
 
-Section 2:
-What is the difference between Git and GitHub?
-Git is a version control system that manages changes to code and files within a project.
+A system that tracks every change made to a project's files — **what** changed, **when**, and **where** the copies live (your machine, or the version control system itself).
 
-GitHub is a platform for managing and organizing files (Git repositories) in the cloud. It allows you to share and edit projects from any device.
+### What is Git?
 
-Section 3:
-What is `git init`?
-`git init` is a command used in Git to create a new repository. This command is used when you need to create a new repository for your current project or to start a new project.
+Git is a **distributed** version control system used to track and manage changes in a software project, and to collaborate with a team. It lets you create copies of a project (**branches**) and merge changes between them securely.
 
-When you run `git init`, Git creates a new folder in the current directory called “git.” This folder is used to store all Git data related to your repository, such as the project history, version records, and other information.
+Other version control tools exist too: `CVS`, `SVN`, `Perforce`, `Bazaar` — but Git's branching/merging model is why it's the most widely used today.
 
-Section 4:
+### Git vs. GitHub
+
+| | Git | GitHub |
+|---|---|---|
+| **What it is** | The version-control tool | A cloud platform for hosting Git repos |
+| **Runs** | Locally, on your machine | Online, accessible from any device |
+| **Job** | Tracks and manages changes | Lets you share, edit, and collaborate on projects |
+
+---
+
+## 2. The Local Workflow
+
+| Command | What it does |
+|---|---|
+| `git init` | Creates a new repository. Sets up the hidden folder Git uses to store the project's history. |
+| `git add <file>` | Stages a file — marks it to be included in the next commit. |
+| `git commit -m "message"` | Permanently saves staged changes to the repo, with a description. |
+| `git log` | Shows the commit history: hash, author, date, and message for each commit. |
+
+```bash
+git add file1.txt file2.txt
+git commit -m "Added new files"
+```
+
+> 📌 A commit is permanent — you can always come back to it to restore that exact state of the project.
+
+### `.gitignore`
+
+A file listing what Git should **never track** — config files, secrets, temp files, build artifacts. Anything listed here stays out of history entirely.
+
+---
+
+## 3. Branching
+
+A **branch** is an independent line of work — a full copy of the project you can safely change without affecting the main line. Once the work is verified, you merge it back in.
+
+| Command | What it does |
+|---|---|
+| `git branch new-feature` | Creates a new branch (copy of current files + full commit history). |
+| `git checkout new-feature` | Switches your active branch. |
+| `git switch -c new-feature` | Modern shortcut — combines `branch` + `checkout` in one step. |
+| `git revert abc123` | Doesn't delete history — adds a **new** commit that undoes a previous one's changes. |
+| `git branch -d branchname` | Deletes a branch. ⚠️ Be careful not to delete the one you're actively on. |
+
+---
+
+## 4. Merging
+
+`git merge branchname` folds another branch's changes into your current branch, creating a new commit that contains both histories. Always check out the target branch first (`git checkout main`) before merging into it.
+
+### Fast-forward vs. 3-way merge
+
+| Type | When it happens | Result |
+|---|---|---|
+| **Fast-forward** | Main branch has no new changes | Feature commits are just appended — no new merge commit |
+| **3-way merge** | Main branch *has* moved on | Git creates a dedicated merge commit reconciling both sides |
+
+### Squash merge
+
+Compresses every commit on a branch into a single, clean commit before merging. Keeps history short and readable — as long as the squashed message actually describes the change.
+
+### Merge conflicts ⚠️
+
+Happen when the same lines are changed differently on two branches. Git flags the conflict and waits for it to be resolved — manually, by picking one side, or with a merge tool — before finishing the merge.
+
+### Merge vs. Rebase
+
+| | ✅ Merge | ⚡ Rebase |
+|---|---|---|
+| **Pros** | Preserves true history · doesn't rewrite commits · simple to reason about | Clean, linear history · fewer conflicts overall |
+| **Cons** | Can get messy with many branches · extra merge commits | Rewrites history · risky on shared branches · can complicate collaboration |
+| **Best for** | Shared/team branches | Solo/local cleanup before sharing |
+
+---
+
+## 5. GitHub & Remotes
+
+Code you write is local by default — invisible to anyone else. GitHub gives a repository a home in the cloud so it can be shared by link and edited collaboratively.
+
+### Uploading a project to GitHub
+
+```bash
 git init
-is a command used in Git to create a new repository. This command is used when you need to create a new repository for your current project or to start a new project. When you run `git init`, Git creates a new folder in the current directory named “git.”. This folder is used to store all Git data related to your repository, such as the project history, version records, and other information.
-
-git add
-This command is used to add specified files to the staging area, which allows you to select the files to be included in the next commit.
-To add new files, you can use `git add` followed by the file names. For example:
-`git add file1.txt file2.txt`
-
-git commit
-This command is used to save the changes added to the staging area and apply them to your repository.
-To create a new commit, you can use `git commit` followed by a commit message describing the changes you’ve made. For example:
-`git commit -m “Added new files”`
-
-The changes made in a commit are permanently stored in your repository, allowing you to revert to them at any time to update the project or restore a previous version of it.
-
-Section 5:
-git log
-is a Git command used to display the commit history of a repository.
- This command displays a list of all commits in the repository’s current branch, and each commit includes information such as the commit hash, author, date, and commit message.
-In general, `git log` can be used to understand the repository’s history and better analyze its development; it can also be used as a tool to locate and review bugs.
-
-Section 6:
-gitignore.
-This is a file created within the working directory of a Git project that contains a list of files and folders to be ignored when tracking changes to the project using Git.
-When you create a new Git repository, you place your files and folders inside the working directory, and you track changes to these files using Git. However, there may be unnecessary or unwanted files or folders, such as configuration files, files containing sensitive information, or temporary files. You can use a `.gitignore` file to tell Git to ignore these files, so they aren’t tracked in the history and version records.
-
-Section 7:
-Branches
-In Git, "branches" allow you to develop different paths of changes in your Git repository. When you create a new branch, you can develop sections or make changes without affecting the other parts that other teams are working on within the same project. In other words, you’ll take a copy of the project and make modifications to it, and the main project won’t be affected by any changes you make. Once you’re sure that what you’ve added or modified is correct, you can merge it into the main project.
-
-Section 8:
-Git Branch
-is a Git command used to create new branches in your Git repository. When you create a new branch, a copy of everything in the current branch is created, including all files and the repository’s commit history. These branches are used to experiment with and develop new features without affecting the main branch.
-
-To create a new branch, you can use the `git branch` command followed by the name of the new branch, for example:
-
-git branch new-feature
-
-Git Checkout
-is a Git command used to switch between different branches in your Git repository. When you run this command with a branch name, you switch to that branch, and it becomes the active branch you’re working on.
-
-To switch to a specific branch, use the `git checkout` command followed by the branch name, for example:
-
-git checkout new-feature
-
-Once you’ve switched to the new branch, you can work on the files and make changes as you wish, without affecting the main branch or any other branches.
-
-Section 9:
-Git Revert
-Git Revert does not delete any previous changes; rather, it creates a new commit that restores the repository to its state before the changes made in the specified commit. In other words, a new commit is created that contains changes that restore the repository to its previous state.
-
-To learn more about how to use Git Revert, let’s take a look at the following example:
-
-git revert abc123
-
-Git Switch
-is a Git command used to switch between different branches or commits in your Git repository. This command combines the functions of both `git branch` and `git checkout`. When you run this command with a branch name or commit ID, you switch to that branch or commit, and it becomes the active branch or commit you’re working on.
-
-To switch to a specific branch or commit, use the `git switch` command followed by the branch name, for example:
-
-git switch -c new-feature
-
-Section 10:
-git branch -d branchname
-The “git branch -d branchname” command is used to delete a Git branch from a Git repository.
-
-Therefore, when you use the “git branch -d branchname” command, Git will delete the specified branch (branchname) from the current Git repository. You need to be careful when using this command because if you accidentally delete the branch you’re working on, you may lose the work you’ve done on that branch.
-
-git merge
-The “git merge” command is used to merge a specific Git branch with another branch in the Git repository. Merging allows you to incorporate changes from one branch into another.
-
-When you merge two branches in Git using the “git merge” command, a new “commit” is created that contains all the changes from both the first and second branches.
-
-The “git merge” command is used as follows:
-
-git merge branchname
-
-where “branchname” is the name of the branch you want to merge into the current branch. It is important to make sure you have switched to the main branch before using this command, using the command
-
- git checkout main-branch
-
-Section 11:
-fast-forward merge
-The term “fast-forward merge” refers to a type of merge in Git where a branch is merged into the main branch if there are no changes in the main branch. In other words, the changes in the branch are merged directly into the main branch without creating a new commit. This type of merge is used when work on a branch is done in isolation and without any overlap with the main branch.
-
-The 3-way merge
-This is another type of branch merge in Git, used when there are changes in the main branch. In this case, Git creates a new merge commit and attempts to merge the changes from both branches.
-
-Section 12:
-Squash Merge
-A squash merge is one of the ways to merge branches in Git. This method is used when you want to merge the changes made in a specific branch into another branch.
-
-A Squash Merge is a good way to reduce the number of unnecessary commits in a Git project’s history and to keep the project’s history clean and organized. It’s important to note that if you use a squash merge in Git, you should make sure to keep the project history neat and organized by using proper commit messages and accurate descriptions of the merged changes.
-
-Section 13:
-Merge conflicts
-Merge conflicts are part of the merge process in Git.
-Merge conflicts occur when the same file or section is modified differently in two different branches by more than one user at the same time, resulting in conflicts between the different changes that must be resolved.
-When conflicts occur, Git notifies the user of the conflicts and asks them to take the necessary action to resolve them.
-Conflicts can be resolved in various ways, such as manually merging the different changes, choosing one change over another, or using automated tools to merge the changes. The appropriate option depends on the nature of the conflict, the file size, and the user’s preferences. Once the conflicts are resolved, the new version is saved.
-
-Section 14:
-A Comparison of the Pros and Cons of Git Merge and Git Rebase
-Git Merge
-Pros
-It preserves the project’s linear history, making it easier to track changes and understand the development process.
-It does not alter the original branch or the original commit history.
-It is a simple and straightforward way to merge changes from one branch into another.
-Disadvantages
-It can result in a messy and confusing commit history when merging multiple branches.
-It can create unnecessary merge tags that do not contribute to the development process.
-It may require additional time and effort to resolve merge conflicts.
-Git Rebase
-Advantages
-It provides a cleaner and more organized commit history by merging changes from one branch into another without creating unnecessary merge tags.
-It enables a smoother, more linear development process.
-It reduces the number of merge conflicts that need to be resolved, as changes are merged into a linear history.
-Disadvantages
-It alters the original commit history, which can make it difficult to track changes and understand the development process.
-
-It can lead to a more complex history, especially when reordering large or long-standing branches.
-
-It can lead to issues with shared branches, as the history is rewritten and can cause conflicts for other developers.
-
-In general, `git merge` is a good choice when you want to keep the project history clear and straightforward.
-
-Section 15:
-We previously discussed how GitHub provides a flexible work environment that developers can use to manage their projects, share work and collaborate with others on joint projects, manage releases and changes to source code, and manage bugs and issues while tracking progress.
-
-The code you write is local—no one but you can see it—but sometimes you want to share it with others. This is where GitHub comes in: it lets you create a repository and upload your local code to it. and you can share the repository with others by sending them the repository link. Once someone has access to the repository, they can edit, modify, and update the source code and push those changes back to the repository.
-
-Follow these steps to upload your project to GitHub.
-git init
-
 git add README.md
-
-git commit -m “first commit”
-
+git commit -m "first commit"
 git branch -M main
-
 git remote add origin https://github.com/userName/repoName.git
-
 git push -u origin main
+```
 
-git init
-This command starts a new Git project. Git creates a new folder named “git.” that contains all the tools Git needs to track changes in the project.
+| Step | Purpose |
+|---|---|
+| `git init` | Start tracking the project |
+| `git add README.md` | Stage the file |
+| `git commit -m "first commit"` | Save the staged snapshot |
+| `git branch -M main` | Rename the default branch to `main` |
+| `git remote add origin <url>` | Link the local repo to a remote named `origin` |
+| `git push -u origin main` | Push commits and link local ↔ remote branches |
 
-git add README.md
-This command adds the README.md file.
+### `git fetch` vs. `git pull`
 
-“git commit -m ”first commit
-This command is used to commit changes to the Git project. Files added to the staging area are included in the commit, and the changes are described in the commit message.
+| | `git fetch` | `git pull` |
+|---|---|---|
+| Downloads new remote commits | ✅ | ✅ |
+| Merges them automatically | ❌ (manual `git merge` needed) | ✅ |
+| Use when | You want to review changes before merging | You want updates merged in immediately |
 
-git branch -M main
-This command renames the repository’s default branch from “master” to “main.”
+### Fork vs. Clone
 
-git remote add origin https://github.com/userName/repoName.git
-This command is used to add the name of the remote repository to which the project is linked to Git. “origin” is used as the remote repository name in this example.
+| | 🍴 Fork | 💻 Clone |
+|---|---|---|
+| **Copies to** | Your own GitHub account | Your local machine |
+| **Use case** | Propose changes to someone else's project via a pull request | Get a working local copy of any repo |
 
-git push -u origin main
-This command pushes the committed changes to the remote repository.
+---
 
-Section 16:
-Git Fetch and Git Pull are both used to fetch updates from a remote Git repository to a local Git repository, but there are differences between them.
-
-Git Fetch
-is used to fetch new updates from the remote repository to the local repository, but it does not merge these updates into the local copy; therefore, you must run the `git merge` command.
-
-Git Pull
-Used to fetch new updates from the remote repository and merge them with the local copy. Git Pull performs the same task as Git Fetch, but adds an extra step: it automatically executes the `git merge` command to merge the new updates with the local copy.
-
-You can use `git fetch` when you just want to retrieve new updates without merging them into your local copy, while you can use `git pull` when you want to retrieve new updates and merge them into your local copy. 
-
-Section 17:
-Fork
-This means creating a copy of the current Git repository and storing it in another Git account. This command is typically used when you want to add improvements or modifications to an existing Git project on the internet; a copy of the original repository is created and modified without affecting the original repository. Anyone can create a copy of the repository, make the desired changes, and submit them to the project’s original repository by sending a pull request.
-
-Clone
-This means creating a copy of the current Git repository and storing it on your computer. This command is typically used when you want to obtain a copy of a Git repository hosted online onto your computer so you can work on it locally. You can use the `clone` command when you want to get an updated version of the repository after changes have been made by the development team.
+<p align="center"><sub>✅ merged into <code>main</code> — course complete</sub></p>
