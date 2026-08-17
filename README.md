@@ -157,3 +157,39 @@ It can lead to a more complex history, especially when reordering large or long-
 It can lead to issues with shared branches, as the history is rewritten and can cause conflicts for other developers.
 
 In general, `git merge` is a good choice when you want to keep the project history clear and straightforward.
+
+Section 15:
+We previously discussed how GitHub provides a flexible work environment that developers can use to manage their projects, share work and collaborate with others on joint projects, manage releases and changes to source code, and manage bugs and issues while tracking progress.
+
+The code you write is local—no one but you can see it—but sometimes you want to share it with others. This is where GitHub comes in: it lets you create a repository and upload your local code to it. and you can share the repository with others by sending them the repository link. Once someone has access to the repository, they can edit, modify, and update the source code and push those changes back to the repository.
+
+Follow these steps to upload your project to GitHub.
+git init
+
+git add README.md
+
+git commit -m “first commit”
+
+git branch -M main
+
+git remote add origin https://github.com/userName/repoName.git
+
+git push -u origin main
+
+git init
+This command starts a new Git project. Git creates a new folder named “git.” that contains all the tools Git needs to track changes in the project.
+
+git add README.md
+This command adds the README.md file.
+
+“git commit -m ”first commit
+This command is used to commit changes to the Git project. Files added to the staging area are included in the commit, and the changes are described in the commit message.
+
+git branch -M main
+This command renames the repository’s default branch from “master” to “main.”
+
+git remote add origin https://github.com/userName/repoName.git
+This command is used to add the name of the remote repository to which the project is linked to Git. “origin” is used as the remote repository name in this example.
+
+git push -u origin main
+This command pushes the committed changes to the remote repository.
