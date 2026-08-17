@@ -193,3 +193,14 @@ This command is used to add the name of the remote repository to which the proje
 
 git push -u origin main
 This command pushes the committed changes to the remote repository.
+
+Section 16:
+Git Fetch and Git Pull are both used to fetch updates from a remote Git repository to a local Git repository, but there are differences between them.
+
+Git Fetch
+is used to fetch new updates from the remote repository to the local repository, but it does not merge these updates into the local copy; therefore, you must run the `git merge` command.
+
+Git Pull
+Used to fetch new updates from the remote repository and merge them with the local copy. Git Pull performs the same task as Git Fetch, but adds an extra step: it automatically executes the `git merge` command to merge the new updates with the local copy.
+
+You can use `git fetch` when you just want to retrieve new updates without merging them into your local copy, while you can use `git pull` when you want to retrieve new updates and merge them into your local copy. 
