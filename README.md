@@ -112,3 +112,10 @@ git merge branchname
 where “branchname” is the name of the branch you want to merge into the current branch. It is important to make sure you have switched to the main branch before using this command, using the command
 
  git checkout main-branch
+
+Section 11:
+fast-forward merge
+The term “fast-forward merge” refers to a type of merge in Git where a branch is merged into the main branch if there are no changes in the main branch. In other words, the changes in the branch are merged directly into the main branch without creating a new commit. This type of merge is used when work on a branch is done in isolation and without any overlap with the main branch.
+
+The 3-way merge
+This is another type of branch merge in Git, used when there are changes in the main branch. In this case, Git creates a new merge commit and attempts to merge the changes from both branches.
