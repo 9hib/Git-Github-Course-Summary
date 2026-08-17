@@ -79,3 +79,18 @@ git checkout new-feature
 
 Once you’ve switched to the new branch, you can work on the files and make changes as you wish, without affecting the main branch or any other branches.
 
+Section 9:
+Git Revert
+Git Revert does not delete any previous changes; rather, it creates a new commit that restores the repository to its state before the changes made in the specified commit. In other words, a new commit is created that contains changes that restore the repository to its previous state.
+
+To learn more about how to use Git Revert, let’s take a look at the following example:
+
+git revert abc123
+
+Git Switch
+is a Git command used to switch between different branches or commits in your Git repository. This command combines the functions of both `git branch` and `git checkout`. When you run this command with a branch name or commit ID, you switch to that branch or commit, and it becomes the active branch or commit you’re working on.
+
+To switch to a specific branch or commit, use the `git switch` command followed by the branch name, for example:
+
+git switch -c new-feature
+
